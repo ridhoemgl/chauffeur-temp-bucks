@@ -26,11 +26,13 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
-      role: {
-        type: Sequelize.STRING
+      role:{
+        type: Sequelize.STRING,
+        defaultValue: 'Customer'
       },
-      isLogin: {
-        type: Sequelize.BOOLEAN
+      isLogin:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,

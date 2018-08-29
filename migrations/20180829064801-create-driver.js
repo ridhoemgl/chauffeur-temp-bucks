@@ -23,8 +23,9 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      isAvailable: {
-        type: Sequelize.BOOLEAN
+      isAvailable:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,
