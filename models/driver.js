@@ -6,10 +6,14 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.INTEGER,
     email: DataTypes.STRING,
     phone: DataTypes.STRING,
-    isAvailable: DataTypes.BOOLEAN
+    isAvailable:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {});
   Driver.associate = function(models) {
-    // associations can be defined here
+    Driver.hasMany(models.Order)
+    Driver.belongsToMany(models.Customer, { through: 'Order'} )
   };
   return Driver;
 };

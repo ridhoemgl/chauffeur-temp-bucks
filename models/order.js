@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     transactionDate: DataTypes.DATE
   }, {});
   Order.associate = function(models) {
-    // associations can be defined here
+    Order.belongsTo(models.Customer)
+    Order.belongsTo(models.Driver)
   };
   return Order;
 };

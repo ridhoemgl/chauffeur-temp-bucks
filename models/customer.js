@@ -7,10 +7,18 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
-    role: DataTypes.STRING,
-    isLogin: DataTypes.BOOLEAN
+    role:{
+      type: DataTypes.STRING,
+      defaultValue: 'Customer'
+    },
+    isLogin:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {});
   Customer.associate = function(models) {
+    Customer.hasMany(models.Order)
+    Customer.belongsToMany(models.Driver, { through: 'Order'} )
     // associations can be defined here
   };
   return Customer;

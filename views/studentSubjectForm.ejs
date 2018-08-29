@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body align="center">
+    <table border="1px" align="center">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <%=student.firstName%>
+                </td>
+                <td>
+                    <%=student.lastName%>
+                </td>
+                <td>
+                    <%=student.email%>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <form action="/student/edit/<%= student.id %>/add-subject" method="POST">
+        Subject:
+        <br>
+        <input name="student_id"" type="hidden" value="<%=student.id%>">
+        <select name="subject_id">
+            <% for(let i = 0 ; i < subjects.length ; i++){ %>
+            <option value="<%=subjects[i].id%>"><%=subjects[i].subjectName%></option>
+            <% } %>
+        </select>
+        <br><br>
+        <input type="submit" value="Save">
+    </form>
+
+</body>
+
+</html>

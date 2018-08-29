@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SUBJECT</title>
+    <h1 align="center">All Subjects Data</h1>
+</head>
+<body align="center">
+    <a href="/subject/add">Add Subjects Data</a>
+    <br><br>
+    <table border=1 align=center>
+            <thead>
+                <th>id</th>
+                <th>Subject Name</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+                <th>Options</th>
+            </thead>
+            <tbody>
+                <% for(let i = 0 ; i < subjects.length ; i++){ %>
+                    <tr>
+                        <td> <%= subjects[i].id %> </td>
+                        <td> <%= subjects[i].subjectName %> </td>
+                        <td></td>
+                        <td> <a href="subject/<%=subjects[i].id %>/enrolled-student">Enrolled Student</a></td>
+                        <td></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+</body>
+</html>
