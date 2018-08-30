@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello <%= user.firstName %>, as <%= user.role %> </h1>
+    <a href="/customer/logout/<%= user.id %>">Logout</a>
+
+    <% if(user.role == 'Admin'){ %>
+        <br><br>
+        <form action="/driver/add/<%=user.id%>" method="POST">
+            First Name: <input type="text" name="firstName"><br>
+            Last Lame: <input type="text" name="lastName"><br>
+            Birth Year: <input type="text" name="birthYear"><br>
+            Email: <input type="text" name="email"><br>
+            Phone: <input type="text" name="phone"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    <% } %>
+
+    <h1> List Drivers </h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Age</td>
+                <td>Status</td>
+                <td>Actions</td>
+                <% if(user.role == 'Admin'){ %>
+                    <td>Option</td>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0 ; i < drivers.length ; i++) { %>
+            <tr>
+                <td> <%= drivers[i].firstName %> </td>
+                <td> <%= drivers[i].lastName %> </td>
+                <td> <%= drivers[i].age %> </td>
+
+                <% let status = '' %>
+                <% if (drivers[i].isAvailable == true){ %>
+                    <td> Available </td>
+                    <td> <a href>Temp Bucks!</a></td>
+                <% }else { %>
+                    <td> Not Available </td>
+                    <td>Booked</td>
+                <% } %>
+
+                <% if(user.role == 'Admin'){ %>
+                    <td> <a href="/driver/edit/<%= drivers[i].id %>">Edit</a> | <a href="/driver/delete/<%= drivers[i].id %>">Delete</a></td>
+                <% } %>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+</body>
+</html>
