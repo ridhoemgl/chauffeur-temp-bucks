@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     phone:{
       type: DataTypes.STRING,
@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     address:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     role:{
       type: DataTypes.STRING,
@@ -78,6 +78,10 @@ module.exports = (sequelize, DataTypes) => {
   Customer.associate = function(models) {
     Customer.hasMany(models.Order)
     Customer.belongsToMany(models.Driver, { through: 'Order'} )
+<<<<<<< HEAD
+=======
+    // associations can be defined here
+>>>>>>> 82e6c5e65cda72b76c20094b3c71e07f1b11c62e
   };
   return Customer;
 };

@@ -1,11 +1,18 @@
 const {Customer} = require('../models')
+<<<<<<< HEAD
 const {Driver} = require('../models')
+=======
+// const {Subject} = require('../models')
+>>>>>>> 82e6c5e65cda72b76c20094b3c71e07f1b11c62e
 // const {StudentSubject} = require('../models')
 
 class CustomerController{
 
     static login(req, res){
+<<<<<<< HEAD
         //  check username & password valid 
+=======
+>>>>>>> 82e6c5e65cda72b76c20094b3c71e07f1b11c62e
         Customer
             .findOne({
                 where: {
@@ -13,6 +20,7 @@ class CustomerController{
                     password: req.body.password
                 }
             })
+<<<<<<< HEAD
             .then((customerBeforeUpdate) => {
                 //  update islogin = true
                 Customer
@@ -54,12 +62,27 @@ class CustomerController{
             })
             .catch((err) => {
                 res.send(err)
+=======
+            .then((data) => {
+                if(data){
+                    res.send(data)
+                }else {
+                    res.render('index')
+                }
+            })
+            .catch((err) => {
+
+>>>>>>> 82e6c5e65cda72b76c20094b3c71e07f1b11c62e
             })
     }
 
     static formRegister(req, res){
+<<<<<<< HEAD
         let errMsg=[]
         res.render('register.ejs', {errMsg})
+=======
+        res.render('register.ejs')
+>>>>>>> 82e6c5e65cda72b76c20094b3c71e07f1b11c62e
     }
 
     static registerCustomer(req, res){
@@ -78,6 +101,7 @@ class CustomerController{
                 res.render('index.ejs')
             })
             .catch((err) => {
+<<<<<<< HEAD
                 let errMsg=[]
                 for(let i = 0 ; i < err.errors.length ; i++){
                     errMsg.push(err.errors[i].message)
@@ -103,5 +127,105 @@ class CustomerController{
                 res.send(err)
             })
     }
+=======
+
+            })
+    }
+    // static listStudent(req, res){
+    //     Student
+    //         .findAll({
+    //             order: [['id', 'ASC']]
+    //         })
+    //         .then((students) => {
+    //             res.render('student', {students})
+    //         })
+    //         .catch((err) => {
+                
+    //         })  
+    // }
+
+    // static editStudent(req, res){
+    //     Student
+    //         .findOne()
+    //         .then((student) => {
+    //             // include: [Subject],
+    //             res.render('studentEdit', {student})
+    //         })
+    //         .catch((err) => {
+
+    //         })
+    // }
+
+    // static editStudentPos(req, res){
+    //     Student
+    //         .update({
+    //             firstName: req.body.firstname,
+    //             lastName: req.body.lastname,
+    //             email: req.body.email,
+    //             updatedAt: new Date
+    //         }, {
+    //             where:{
+    //                 id: req.params.id
+    //             }
+    //         })
+    //         .then(() => {
+    //             res.redirect('/student')
+    //         })
+    //         .catch((err) => {
+
+    //         })
+    // }
+
+    // static deleteStudent(req, res){
+    //     Student
+    //         .destroy({
+    //             where:{
+    //                 id: req.params.id
+    //             }
+    //         })
+    //         .then(() => {
+    //             res.redirect('/student')
+    //         })
+    //         .catch((err) => {
+
+    //         })
+    // }
+
+    // static addSubject(req, res){
+    //     Student
+    //         .findOne({
+    //             where:{
+    //                 id: req.params.id
+    //             }
+    //         })
+    //         .then((student) => {
+    //             Subject
+    //             .findAll()
+    //             .then((subjects) => {
+    //                 res.render('studentSubjectForm', {student, subjects})
+    //             })
+    //             .catch((err) => {
+    //             })
+    //         })
+    //         .catch((err) => {
+
+    //         })
+    // }
+
+    // static addSubjectPos(req, res){
+    //     StudentSubject
+    //         .create({
+    //             StudentId: req.body.student_id,
+    //             SubjectId: req.body.subject_id,
+    //             updatedAt: new Date
+    //         })
+    //         .then(() => {
+    //             res.redirect('/student')
+    //         })
+    //         .catch((err) => {
+
+    //         })
+    // }
+>>>>>>> 82e6c5e65cda72b76c20094b3c71e07f1b11c62e
 }
 module.exports = CustomerController
