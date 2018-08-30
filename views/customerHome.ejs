@@ -8,7 +8,12 @@
 </head>
 <body>
     <h1>Hello <%= user.firstName %>, as <%= user.role %> </h1>
-    <a href="/customer/logout/<%= user.id %>">Logout</a>
+
+    <% if( user.role == 'Customer'){ %>
+        <a href="/customer/edit/<%= user.id %>">Edit Profile</a><br>
+        <a href="/customer/order">My Order</a><br>
+    <% } %>
+        <a href="/customer/logout/<%= user.id %>">Logout</a>
 
     <% if(user.role == 'Admin'){ %>
         <br><br>
@@ -47,14 +52,13 @@
                 <% let status = '' %>
                 <% if (drivers[i].isAvailable == true){ %>
                     <td> Available </td>
-                    <td> <a href>Temp Bucks!</a></td>
+                    <td> <a href="/customer/driver/add/<%= drivers[i].id %>">Temp Bucks!</a> </td>
+                    <% if(user.role == 'Admin'){ %>
+                        <td> <a href="/driver/edit/<%= drivers[i].id %>">Edit</a> | <a href="/driver/delete/<%= drivers[i].id %>">Delete</a></td>
+                    <% } %>
                 <% }else { %>
-                    <td> Not Available </td>
-                    <td>Booked</td>
-                <% } %>
-
-                <% if(user.role == 'Admin'){ %>
-                    <td> <a href="/driver/edit/<%= drivers[i].id %>">Edit</a> | <a href="/driver/delete/<%= drivers[i].id %>">Delete</a></td>
+                    <td> Booked </td>
+                    <td></td>
                 <% } %>
             </tr>
             <% } %>

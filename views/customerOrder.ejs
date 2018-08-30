@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>My Order</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Driver Name</td>
+                <td>Driver Email</td>
+                <td>Transaction Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i = 0 ; i < orders.length ; i++){ %>
+            <tr>
+                <td><%= orders[i].Driver.firstName %></td>
+                <td><%= orders[i].Driver.email %></td>
+                <% let convertDate = dateFormat(orders[i].transactionDate) %>
+                <td><%= convertDate %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    
+</body>
+</html>

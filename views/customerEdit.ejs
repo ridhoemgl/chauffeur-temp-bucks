@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/customer/edit/<%=customer.id%>" method="POST">
+        First name:<br>
+        <input type="text" name="firstName" value="<%= customer.firstName %>"><br>
+        Last name:<br>
+        <input type="text" name="lastName" value="<%=customer.lastName %>"><br>
+        Phone:<br>
+        <input type="text" name="phone" value="<%= customer.phone%>"><br>
+        Address:<br>
+        <input type="text" name="address" value="<%= customer.address %>"><br><br>
+        
+        <input type="submit" value="Save">
+        <br>
+
+        <% if(errMsg && errMsg.length !== 0){ %>
+            <% for (let i = 0 ; i < errMsg.length ; i++){ %>
+                    <li><%= errMsg[i] %></li>
+            <% } %>
+        <% } %>
+
+      </form>
+</body>
+</html>

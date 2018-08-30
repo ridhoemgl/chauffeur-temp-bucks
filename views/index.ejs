@@ -10,10 +10,10 @@
 <body align="center">
     <form action="/customer/login" method="POST">
         Email:
-        <input type="text" name="email"><br>
+        <input type="text" name="email" required><br>
         <br>
         Password:
-        <input type="text" name="password"><br>
+        <input type="text" name="password" required><br>
         <br>
         <input type="submit" value="Login">
     </form>
@@ -21,5 +21,6 @@
     <i>Don't Have Account?</i>
     <br>
     <a href="/customer/form" method="GET"> <b>Register Now!</b></a>
+
 </body>
 </html>

@@ -1,6 +1,18 @@
 const {Customer} = require('../models')
 const {Driver} = require('../models')
-// const {StudentSubject} = require('../models')
+const {Order} = require('../models')
+const nodemailer = require('nodemailer')
+const updateSession = require('../helpers/updateSession')
+const dateFormat = require('../helpers/dateFormat')
+const emailConfirmation = require('../helpers/emailConfimation')
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'ridhotass@gmail.com',
+        pass: 'thisisgonnabefun'
+    }
+});
 
 class CustomerController{
 
@@ -40,11 +52,7 @@ class CustomerController{
                                 }
                                 // list all drivers (isAvailable = true)
                                 Driver
-                                    .findAll({
-                                        where:{
-                                            isAvailable: true
-                                        }
-                                    })
+                                    .findAll()
                                     .then((drivers) => {
                                         let user = req.session.user
                                         res.render('customerHome.ejs', {user, drivers})
@@ -53,7 +61,8 @@ class CustomerController{
                     })
             })
             .catch((err) => {
-                res.send(err)
+                let errMsg = ['invalid email or password']
+                res.render('index', {errMsg})
             })
     }
 
@@ -75,7 +84,7 @@ class CustomerController{
                 updatedAt: new Date,
             })
             .then(() => {
-                res.render('index.ejs')
+                res.render('index')
             })
             .catch((err) => {
                 let errMsg=[]
@@ -98,6 +107,100 @@ class CustomerController{
             })
             .then(() => {
                 res.redirect('/')
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+    static AddDriver(req, res){
+        Order
+            .create({
+                CustomerId: req.session.user.id,
+                DriverId: req.params.id,
+                transactionDate: new Date
+            })
+            .then(() => {
+                Driver
+                    .findById(req.params.id)
+                    .then((driver) => {
+                        let mail = emailConfirmation(driver.firstName, driver.lastName, driver.email) 
+                        transporter.sendMail(mail, function (err, info) {
+                            if(err)
+                              console.log(err)
+                            else
+                              console.log(info);
+                         });
+                         Driver
+                             .update({
+                                 isAvailable: false
+                             },{
+                                 where:{
+                                     id: req.params.id
+                                 }
+                             })
+                             .then(() => {
+                                 Driver
+                                     .findAll()
+                                     .then((drivers) => {
+                                         let user = req.session.user
+                                         res.render('customerHome.ejs', {user, drivers})
+                                     })
+                             })
+                    })
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+    static showCustomer(req, res){
+        Customer
+            .findById(req.params.id)
+            .then((customer) => {
+                let errMsg =[]
+                res.render('customerEdit.ejs', {customer, errMsg})
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+    static editCustomer(req, res){
+        Customer
+            .update({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                phone: req.body.phone,
+                address: req.body.address
+            },{
+                where:{
+                    id: req.params.id
+                }
+            })
+            .then(() => {
+                Driver
+                    .findAll()
+                    .then((drivers) => {
+                        let user = updateSession(req.body.firstName, req.body.lastName, req.session.user)
+                        res.render('customerHome.ejs', {user, drivers})
+                    })
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+    static showOrder(req, res){
+        Order
+            .findAll({
+                include:[Driver],
+                where:{
+                    CustomerId: req.session.user.id
+                }
+            })
+            .then((orders) => {
+                res.render('customerOrder', {orders, dateFormat})
             })
             .catch((err) => {
                 res.send(err)
