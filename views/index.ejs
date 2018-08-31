@@ -5,22 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to Chauffeur Temp Bucks</title>
-    <h1 align="center">CHAUFFEUR TEMP BUCKS</h1>
-</head>
-<body align="center">
-    <form action="/customer/login" method="POST">
-        Email:
-        <input type="text" name="email" required><br>
-        <br>
-        Password:
-        <input type="text" name="password" required><br>
-        <br>
-        <input type="submit" value="Login">
-    </form>
-    <br><br>
-    <i>Don't Have Account?</i>
-    <br>
-    <a href="/customer/form" method="GET"> <b>Register Now!</b></a>
+    <style>
+        body {
+            background: url("/images/car01.jpg");
+            height: 100%; 
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .content {
+            background-color:lightcyan;
+            margin: auto;
+            width: 500px;   
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        
+    </style>
 
+</head>
+<body>
+    <br><br><br><br><br>
+    <div class="content"> 
+        <img src="/images/CTB_logo3.png" width="500" height="300"><br><br><br><br>
+        <div class="container">
+            <form action="/customer/login" method="POST">
+                Email:<br>
+                <input type="text" name="email"><br>
+                <br>
+                Password:<br>
+                <input type="password" name="password"><br>
+                <br>
+                <input type="submit" value="Login">
+            </form>
+            <br><br>
+            <i>Don't Have Account?</i>
+            <br>
+            <a href="/customer/form" method="GET"> <b>Register Now!</b></a>
+        </div>
+    </div>
 </body>
 </html>

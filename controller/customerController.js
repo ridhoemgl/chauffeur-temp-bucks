@@ -2,6 +2,7 @@ const {Customer} = require('../models')
 const {Driver} = require('../models')
 const {Order} = require('../models')
 const nodemailer = require('nodemailer')
+const crypto = require('crypto');
 const updateSession = require('../helpers/updateSession')
 const dateFormat = require('../helpers/dateFormat')
 const emailConfirmation = require('../helpers/emailConfimation')
@@ -18,6 +19,16 @@ class CustomerController{
 
     static login(req, res){
         //  check username & password valid 
+
+        
+
+        const secret = 'abcdefg';
+        const hash = crypto.createHmac('sha256', secret)
+                            .update(req.body.password)
+                            .digest('hex');
+        console.log(hash);
+        req.body.password=hash
+
         Customer
             .findOne({
                 where: {

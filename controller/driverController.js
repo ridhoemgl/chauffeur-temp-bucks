@@ -1,6 +1,6 @@
 const {Driver} = require('../models')
 const {Customer} = require('../models')
-
+const smsNotification = require('../helpers/smsNotification')
 
 class DriverController{
 
@@ -84,5 +84,20 @@ class DriverController{
                 res.send(err)
             })
     }
+
+    static approvalDriver(req, res){
+
+        Driver
+            .findAll()
+            .then((drivers) => {
+                let status = smsNotification(req.session.user.firstName)
+                console.log(status);
+                let user = req.session.user
+                res.render('customerHome.ejs', {user, drivers})
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    };
 }
 module.exports = DriverController

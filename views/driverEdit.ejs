@@ -4,14 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <h1>Edit Driver, <%= `${driver.firstName} ${driver.lastName}` %> </h1>
+    <title>Edit Database</title>
+    <style>
+        body {
+        background: url("/images/jalan04.jpg");
+        height: 100%; 
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: sans-serif;
+        text-align: center;
+        color: whitesmoke;
+        }
+
+        .label {
+            width: 100px;
+            float: left
+        }
+        .titik {
+            width: 5px;
+            float: left
+        }
+        .input {
+            width: 200px;
+            float: left
+        }
+        form {
+            margin: auto;
+            width: 25%
+                
+        }
+        .tombol {
+            margin: auto;
+            width: 30%
+        }
+    </style>
+
 </head>
 <body>
+        <img src="/images/CTB_logo3.png" width="500" height="300"><br><br><br>
+        <h1>Driver Database Editor</h1>
+        <br>
+
+        <h2>File of <%= `${driver.firstName} ${driver.lastName}` %> </h2>
+        
         <form action="/driver/edit/<%=driver.id%>" method="POST">
-            First Name: <input type="text" name="firstName" value="<%= driver.firstName %>"><br>
-            Last Name: <input type="text" name="lastName" value="<%= driver.lastName %>"><br>
-            Age: <input type="text" name="age" value="<%= driver.age %>"><br><br>
-            <input type="submit" value="Save">
+            <div>
+                <div class="label">First Name</div>
+                <div class="titik">:</div>
+                <div class="input"><input type="text" name="firstName" value="<%= driver.firstName %>"></div>
+            </div>
+            <div style="clear:both"></div>
+            <div>
+                <div class="label">Last Name</div>
+                <div class="titik">:</div>
+                <div class="input"><input type="text" name="lastName" value="<%= driver.lastName %>"></div>
+            </div>
+            <div style="clear:both"></div>
+            <div>
+                <div class="label">Age</div>
+                <div class="titik">:</div>
+                <div class="input"><input type="text" name="age" value="<%= driver.age %>"></div>
+            </div>
+            <div style="clear:both"></div>
+             <br>
+           
+            
+            <div class="tombol"><input type="submit" value="Save"></div>
+                
+            
         </form>
 </body>
 </html>

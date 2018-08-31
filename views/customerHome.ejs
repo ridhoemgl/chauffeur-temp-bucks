@@ -4,32 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Main Menu</title>
+    <style>
+        body {
+        background: url("/images/jalan05.jpg");
+        height: 100%; 
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: sans-serif;
+        text-align: center;
+        color: whitesmoke;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello <%= user.firstName %>, as <%= user.role %> </h1>
+    <img src="/images/CTB_logo3.png" width="400" height="250">
+    <h2>Hello <%= user.firstName %>, our respected <%= user.role %>... </h2>
+    <h3>Please select from our chauffeur partners as below</h3>
+    <br>
 
-    <% if( user.role == 'Customer'){ %>
-        <a href="/customer/edit/<%= user.id %>">Edit Profile</a><br>
-        <a href="/customer/order">My Order</a><br>
-    <% } %>
-        <a href="/customer/logout/<%= user.id %>">Logout</a>
-
-    <% if(user.role == 'Admin'){ %>
-        <br><br>
-        <form action="/driver/add/<%=user.id%>" method="POST">
-            First Name: <input type="text" name="firstName"><br>
-            Last Lame: <input type="text" name="lastName"><br>
-            Birth Year: <input type="text" name="birthYear"><br>
-            Email: <input type="text" name="email"><br>
-            Phone: <input type="text" name="phone"><br>
-
-            <input type="submit" value="Submit">
-        </form>
-    <% } %>
-
-    <h1> List Drivers </h1>
-    <table border="1">
+    <table border="1" align="center">
         <thead>
             <tr>
                 <td>First Name</td>
@@ -52,18 +46,42 @@
                 <% let status = '' %>
                 <% if (drivers[i].isAvailable == true){ %>
                     <td> Available </td>
-                    <td> <a href="/customer/driver/add/<%= drivers[i].id %>">Temp Bucks!</a> </td>
-                    <% if(user.role == 'Admin'){ %>
-                        <td> <a href="/driver/edit/<%= drivers[i].id %>">Edit</a> | <a href="/driver/delete/<%= drivers[i].id %>">Delete</a></td>
-                    <% } %>
+                    <td> <a href="/customer/driver/add/<%= drivers[i].id %>">Temp Bucks!</a></td>
                 <% }else { %>
-                    <td> Booked </td>
-                    <td></td>
+                    <td> Not Available </td>
+                    <td>Booked</td>
+                <% } %>
+
+                <% if(user.role == 'Admin'){ %>
+                    <td> <a href="/driver/edit/<%= drivers[i].id %>">Edit</a> | <a href="/driver/delete/<%= drivers[i].id %>">Delete</a></td>
                 <% } %>
             </tr>
             <% } %>
         </tbody>
     </table>
+    <br>
+
+    <% if( user.role == 'Customer'){ %>
+        <button><a href="/customer/edit/<%= user.id %>">Edit Profile</a><br></button>
+        <button><a href="/customer/order">My Order</a><br></button>
+        
+    <% } %>
+        
+    <% if(user.role == 'Admin'){ %>
+        <p>Adding a new Driver?</p>
+        <form action="/driver/add/<%=user.id%>" method="POST">
+            First name: <input type="text" name="firstName"><br>
+            Last  name: <input type="text" name="lastName"><br>
+            Age: <input type="text" name="birthYear"><br>
+            Email ID: <input type="text" name="email"><br>
+            Phone #: <input type="text" name="phone"><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+        <br>
+    <% } %>
+
+    <button><a href="/customer/logout/<%= user.id %>">Logout</a></button>
 
 </body>
 </html>

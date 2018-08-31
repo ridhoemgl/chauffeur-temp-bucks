@@ -74,7 +74,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
-  }, {});
+  }, {
+    hooks: {
+      beforeCreate: (user, options) => {
+        const crypto = require('crypto');
+
+          const secret = 'abcdefg';
+          const hash = crypto.createHmac('sha256', secret)
+                            .update(user.password)
+                            .digest('hex');
+          console.log(hash);
+          user.password=hash
+      }
+    }
+  });
   Customer.associate = function(models) {
     Customer.hasMany(models.Order)
     Customer.belongsToMany(models.Driver, { through: 'Order'} )

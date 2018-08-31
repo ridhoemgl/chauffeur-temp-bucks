@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Edit Customer Profile</title>
+    <style>
+            body {
+            background: url("/images/jalan04.jpg");
+            height: 100%; 
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: sans-serif;
+            text-align: center;
+            color: whitesmoke;
+        }
+    </style>
 </head>
 <body>
+    <img src="/images/CTB_logo3.png" width="500" height="300"><br><br><br><br>
+    <h2>Would you like to update your profile?</h2>
     <form action="/customer/edit/<%=customer.id%>" method="POST">
         First name:<br>
         <input type="text" name="firstName" value="<%= customer.firstName %>"><br>
@@ -27,5 +40,7 @@
         <% } %>
 
       </form>
+      <br>
+      <button type="button" onclick="window.history.go(-1)">CANCEL</button>
 </body>
 </html>

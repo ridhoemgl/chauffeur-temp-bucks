@@ -1,5 +1,10 @@
 const Route = require('express').Router()
 const CustomerController = require('../controller/customerController')
+// const isLogin = require('../helpers/authLogin');
+
+// Route.get('/login',(req,res)=>{
+//     res.render('index');
+// })
 
 Route.post('/login', CustomerController.login)
 Route.get('/form', CustomerController.formRegister)
